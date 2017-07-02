@@ -1,0 +1,7 @@
+1.0.0 (02-Jul-2017)
+- Initial Version
+Features:
+- All stations by SomaFM
+- Quality selector... prompt, auto, highest/lowest mp3, highest/lowest aac
+- Sort by name, popularity, genre
+- Station info
