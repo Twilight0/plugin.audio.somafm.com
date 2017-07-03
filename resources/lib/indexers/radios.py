@@ -31,9 +31,16 @@ class Indexer:
         self.list = [] ; self.data = [] ; self.groups = [] ; self.qofs = []
         self.main = 'http://somafm.com'
         self.index = urljoin(self.main, '/listen/genre.html')
-        self.switch = {'title': control.lang(30006).format(control.setting('group')),
-                       'icon': control.join(control.addonPath, 'resources', 'media', 'selector.png'),
-                       'action': 'switcher'}
+
+        if control.setting('group') == 'Name':
+            self.translated = control.lang(30003)
+        elif control.setting('group') == 'Popularity':
+            self.translated = control.lang(30004)
+        elif control.setting('group') == 'Genre':
+            self.translated = control.lang(30005)
+
+        self.switch = {'title': control.lang(30006).format(self.translated),
+                       'icon': control.join(control.addonPath, 'resources', 'media', 'selector.png'), 'action': 'switcher'}
 
     def switcher(self):
 
@@ -49,11 +56,11 @@ class Indexer:
         choice = control.selectDialog(heading=control.lang(30006), list=self.groups)
 
         if choice == 0:
-            seq(self.groups.pop(0))
+            seq('Name')
         elif choice == 1:
-            seq(self.groups.pop(1))
+            seq('Popularity')
         elif choice == 2:
-            seq(self.groups.pop(2))
+            seq('Genre')
         else:
             control.execute('Dialog.Close(all)')
 
@@ -82,9 +89,9 @@ class Indexer:
             genre = client.parseDOM(genre, 'h1', attrs={'class': 'GenreHeader'})[-1]
             description = client.parseDOM(item, 'p', attrs={'class': 'descr'})[0]
 
-            data = {'title': title + ' - ' + now, 'image': image, 'url': streams,
-                    'playcount': int(listeners), 'history': history, 'genre': genre, 'artist': now.partition(' - ')[0],
-                    'album': title, 'year': date.year, 'lyrics': description}
+            data = {'title': title + ' ~ ' + now, 'image': image, 'url': streams,
+                    'listeners': int(listeners), 'history': history, 'genre': genre, 'artist': now.partition(' - ')[0],
+                    'album': title, 'year': date.year, 'comment': description, 'mediatype': 'music'}
 
             self.list.append(data)
 
@@ -105,24 +112,30 @@ class Indexer:
 
         for item in self.list:
             refresh = {'title': 30015, 'query': {'action': 'refresh'}}
-            station_info = {'title': 30016, 'query': {'action': 'description', 'text': item['lyrics']}}
+            station_info = {'title': 30016, 'query': {'action': 'description', 'text': item['comment']}}
             history = {'title': 30017, 'query': {'action': 'history', 'url': item['history']}}
             item.update({'cm': [refresh, station_info, history]})
 
-        if control.setting('group') == control.lang(30003):
+        if control.setting('group') == 'Name':
             self.list = sorted(self.list, key=lambda k: k['title'].lower())
             self.list = itertools.groupby(self.list, key=itemgetter('title'))
             self.list = [next(item[1]) for item in self.list]
-        elif control.setting('group') == control.lang(30004):
+        elif control.setting('group') == 'Popularity':
             self.list = sorted(self.list, key=lambda k: str(k['playcount']))
             self.list = itertools.groupby(self.list, key=itemgetter('title'))
             self.list = [next(item[1]) for item in self.list]
-        elif control.setting('group') == control.lang(30005):
+        elif control.setting('group') == 'Genre':
             self.list = sorted(self.list, key=lambda k: k['genre'].lower())
             self.list = itertools.groupby(self.list, key=itemgetter('title'))
             self.list = [next(item[1]) for item in self.list]
         else:
             self.list = self.list
+
+        count = 1
+
+        for item in self.list:
+            item.setdefault('tracknumber', count)
+            count +=1
 
         li = control.item(label=self.switch['title'], iconImage=self.switch['icon'])
         li.setArt({'fanart': control.addonInfo('fanart')})
