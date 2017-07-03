@@ -121,7 +121,7 @@ class Indexer:
             self.list = itertools.groupby(self.list, key=itemgetter('title'))
             self.list = [next(item[1]) for item in self.list]
         elif control.setting('group') == 'Popularity':
-            self.list = sorted(self.list, key=lambda k: str(k['playcount']))
+            self.list = sorted(self.list, key=lambda k: str(k['listeners']))
             self.list = itertools.groupby(self.list, key=itemgetter('title'))
             self.list = [next(item[1]) for item in self.list]
         elif control.setting('group') == 'Genre':
