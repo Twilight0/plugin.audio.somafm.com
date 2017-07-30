@@ -42,11 +42,11 @@ elif action == 'switcher':
 
     radios.Indexer().switcher()
 
-elif action == 'description':
-
-    from resources.lib.modules import text_viewer
-
-    text_viewer.description(text)
+# elif action == 'description':
+#
+#     from resources.lib.modules import text_viewer
+#
+#     text_viewer.description(text)
 
 elif action == 'history':
 

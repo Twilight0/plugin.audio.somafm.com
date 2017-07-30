@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.somafm.com" name="SomaFM Radio" version="1.0.2" provider-name="Twilight0">
+<addon id="plugin.audio.somafm.com" name="SomaFM Radio" version="1.1.0" provider-name="Twilight0">
     <requires>
         <import addon="xbmc.python" version="2.24.0"/>
         <import addon="script.module.tulip" version="1.1.1"/>
@@ -19,6 +19,11 @@
         <license>GNU GPL, version 2 or later</license>
         <website>http://somafm.com</website>
         <news>
+1.1.0 (23-07-2017)
+- Removed station info context menu (choose song info instead)
+- Option to hide song info &amp; utilize caching
+- Option to hide station name
+
 1.0.2 (04-Jul-2017)
 - Fix for forgotten key in indexer's list &amp; sort method
 

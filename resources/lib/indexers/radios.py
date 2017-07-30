@@ -18,7 +18,7 @@
         along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from tulip import directory, client, cache, control, ordereddict
+from tulip import directory, client, cache, control
 from ..modules import syshandle, sysaddon
 from urlparse import urljoin
 import json
@@ -74,7 +74,8 @@ class Indexer:
         items = client.parseDOM(main, 'li')
 
         for item in items:
-            title = client.parseDOM(item, 'h3')[0]
+
+            name = client.parseDOM(item, 'h3')[0]
             image = client.parseDOM(item, 'img', ret='src')[0]
             image = urljoin(self.main, image)
             urls = client.parseDOM(item, 'a', ret='href')[3:-1]
@@ -89,9 +90,16 @@ class Indexer:
             genre = client.parseDOM(genre, 'h1', attrs={'class': 'GenreHeader'})[-1]
             description = client.parseDOM(item, 'p', attrs={'class': 'descr'})[0]
 
-            data = {'title': title + ' ~ ' + now, 'image': image, 'url': streams,
+            if control.setting('caching') == 'false' and control.setting('station') == 'true':
+                title = name + ' ~ ' + now
+            elif control.setting('caching') == 'false' and control.setting('station') == 'false':
+                title = now.partition(' - ')[2]
+            else:
+                title = name
+
+            data = {'title': title, 'image': image, 'url': streams,
                     'listeners': int(listeners), 'history': history, 'genre': genre, 'artist': now.partition(' - ')[0],
-                    'album': title, 'year': date.year, 'comment': description, 'mediatype': 'music'}
+                    'album': name, 'year': date.year, 'comment': description, 'mediatype': 'music'}
 
             self.list.append(data)
 
@@ -102,7 +110,7 @@ class Indexer:
         import itertools
         from operator import itemgetter
 
-        self.list = cache.get(self.get_stations, 0, self.index)
+        self.list = cache.get(self.get_stations, 0 if control.setting('caching') == 'false' else int(control.setting('period')), self.index)
 
         if self.list is None:
             return
@@ -112,21 +120,22 @@ class Indexer:
 
         for item in self.list:
             refresh = {'title': 30015, 'query': {'action': 'refresh'}}
-            station_info = {'title': 30016, 'query': {'action': 'description', 'text': item['comment']}}
+            cache_clear = {'title': 30002, 'query': {'action': 'cache_clear'}}
+            # station_info = {'title': 30016, 'query': {'action': 'description', 'text': item['comment']}}
             history = {'title': 30017, 'query': {'action': 'history', 'url': item['history']}}
-            item.update({'cm': [refresh, station_info, history]})
+            item.update({'cm': [refresh, cache_clear, history]})
 
         if control.setting('group') == 'Name':
-            self.list = sorted(self.list, key=lambda k: k['title'].lower())
-            self.list = itertools.groupby(self.list, key=itemgetter('title'))
+            self.list = sorted(self.list, key=lambda k: k['album'].lower())
+            self.list = itertools.groupby(self.list, key=itemgetter('album'))
             self.list = [next(item[1]) for item in self.list]
         elif control.setting('group') == 'Popularity':
             self.list = sorted(self.list, key=lambda k: str(k['listeners']))
-            self.list = itertools.groupby(self.list, key=itemgetter('title'))
+            self.list = itertools.groupby(self.list, key=itemgetter('album'))
             self.list = [next(item[1]) for item in self.list]
         elif control.setting('group') == 'Genre':
             self.list = sorted(self.list, key=lambda k: k['genre'].lower())
-            self.list = itertools.groupby(self.list, key=itemgetter('title'))
+            self.list = itertools.groupby(self.list, key=itemgetter('album'))
             self.list = [next(item[1]) for item in self.list]
         else:
             self.list = self.list
