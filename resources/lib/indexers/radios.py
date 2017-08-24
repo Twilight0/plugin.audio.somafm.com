@@ -48,6 +48,8 @@ class Indexer:
 
             control.setSetting('group', choose)
             control.idle()
+            # if control.condVisibility('MusicPlayer.HasNext'):
+            #     control.execute('Playlist.Clear')
             control.sleep(50)
             control.refresh()
 
@@ -67,7 +69,7 @@ class Indexer:
     def get_stations(self, url):
 
         import datetime
-        date = datetime.datetime.now()
+        year = datetime.datetime.now().year
 
         html = client.request(url)
         main = client.parseDOM(html, 'div', attrs={'id': 'midstations'})[0]
@@ -99,7 +101,7 @@ class Indexer:
 
             data = {'title': title, 'image': image, 'url': streams,
                     'listeners': int(listeners), 'history': history, 'genre': genre, 'artist': now.partition(' - ')[0],
-                    'album': name, 'year': date.year, 'comment': description, 'mediatype': 'music'}
+                    'album': name, 'year': year, 'comment': description, 'mediatype': 'music'}
 
             self.list.append(data)
 
@@ -125,15 +127,30 @@ class Indexer:
             history = {'title': 30017, 'query': {'action': 'history', 'url': item['history']}}
             item.update({'cm': [refresh, cache_clear, history]})
 
-        if control.setting('group') == 'Name':
+        if control.setting('switcher') == 'true':
+            if control.setting('group') == 'Name':
+                self.list = sorted(self.list, key=lambda k: k['album'].lower())
+                self.list = itertools.groupby(self.list, key=itemgetter('album'))
+                self.list = [next(item[1]) for item in self.list]
+            elif control.setting('group') == 'Popularity':
+                self.list = sorted(self.list, key=lambda k: str(k['listeners']))
+                self.list = itertools.groupby(self.list, key=itemgetter('album'))
+                self.list = [next(item[1]) for item in self.list]
+            elif control.setting('group') == 'Genre':
+                self.list = sorted(self.list, key=lambda k: k['genre'].lower())
+                self.list = itertools.groupby(self.list, key=itemgetter('album'))
+                self.list = [next(item[1]) for item in self.list]
+            else:
+                self.list = self.list
+        elif control.setting('switcher') == 'false' and control.setting('index_method') == '0':
             self.list = sorted(self.list, key=lambda k: k['album'].lower())
             self.list = itertools.groupby(self.list, key=itemgetter('album'))
             self.list = [next(item[1]) for item in self.list]
-        elif control.setting('group') == 'Popularity':
+        elif control.setting('switcher') == 'false' and control.setting('index_method') == '1':
             self.list = sorted(self.list, key=lambda k: str(k['listeners']))
             self.list = itertools.groupby(self.list, key=itemgetter('album'))
             self.list = [next(item[1]) for item in self.list]
-        elif control.setting('group') == 'Genre':
+        elif control.setting('switcher') == 'false' and control.setting('index_method') == '2':
             self.list = sorted(self.list, key=lambda k: k['genre'].lower())
             self.list = itertools.groupby(self.list, key=itemgetter('album'))
             self.list = [next(item[1]) for item in self.list]
@@ -146,9 +163,13 @@ class Indexer:
             item.setdefault('tracknumber', count)
             count +=1
 
-        li = control.item(label=self.switch['title'], iconImage=self.switch['icon'])
-        li.setArt({'fanart': control.addonInfo('fanart')})
-        url = '{0}?action={1}'.format(sysaddon, self.switch['action'])
-        control.addItem(syshandle, url, li)
+        if control.setting('switcher') == 'true':
+            li = control.item(label=self.switch['title'], iconImage=self.switch['icon'])
+            li.setArt({'fanart': control.addonInfo('fanart')})
+            li.setProperty('IsPlayable', 'false')
+            url = '{0}?action={1}'.format(sysaddon, self.switch['action'])
+            control.addItem(syshandle, url, li, isFolder=False)
+        else:
+            pass
 
         directory.add(self.list, infotype='music')
