@@ -1,3 +1,6 @@
+2.0.2 (02-10-2017)
+- Added info context menu option
+
 2.0.1 (01-10-2017)
 - Minor fix for station numbering
 - Changed method of getting stations when caching is disabled
