@@ -1,25 +1,15 @@
 # -*- coding: utf-8 -*-
 
-"""
-    SomaFM Add-on
-    Author: Twilight0
+'''
+    Soma FM Addon
+    Author Twilight0
 
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
+    SPDX-License-Identifier: GPL-3.0-only
+    See LICENSES/GPL-3.0-only for more information.
+'''
 
 from tulip import directory, client, cache, control
-from urlparse import urljoin
+from tulip.compat import urljoin
 import json, re
 import datetime
 
@@ -74,7 +64,10 @@ class Indexer:
     def stations(self):
 
         if control.setting('caching') == 'false':
-            self.list = self.get_stations()
+            try:
+                self.list = self.get_stations()
+            except Exception as e:
+                self.list = None
         else:
             self.list = cache.get(self.get_stations, int(control.setting('period')))
 
@@ -91,10 +84,15 @@ class Indexer:
             station_info = {'title': 30016, 'query': {'action': 'description', 'text': item['comment']}}
             history = {'title': 30017, 'query': {'action': 'history', 'url': item['history']}}
 
-            if control.infoLabel('System.AddonVersion(xbmc.python)') == '2.24.0':
+            if control.kodi_version() < 17.0:
                 item.update({'cm': [refresh, cache_clear, history], 'action': 'play', 'isFolder': 'False'})
             else:
-                item.update({'cm': [refresh, cache_clear, history, station_info, info_cm], 'action': 'play', 'isFolder': 'False'})
+                item.update(
+                    {
+                        'cm': [refresh, cache_clear, history, station_info, info_cm],
+                        'action': 'play', 'isFolder': 'False'
+                    }
+                )
 
         for count, item in list(enumerate(self.list, start=1)):
             item.setdefault('tracknumber', count)
@@ -102,4 +100,5 @@ class Indexer:
         control.sortmethods('album')
         control.sortmethods('genre')
         control.sortmethods('listeners')
+
         directory.add(self.list, infotype='music')

@@ -1,22 +1,12 @@
 # -*- coding: utf-8 -*-
 
-"""
-    SomaFM Add-on
-    Author: Twilight0
+'''
+    Soma FM Addon
+    Author Twilight0
 
-        This program is free software: you can redistribute it and/or modify
-        it under the terms of the GNU General Public License as published by
-        the Free Software Foundation, either version 3 of the License, or
-        (at your option) any later version.
-
-        This program is distributed in the hope that it will be useful,
-        but WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-        GNU General Public License for more details.
-
-        You should have received a copy of the GNU General Public License
-        along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
+    SPDX-License-Identifier: GPL-3.0-only
+    See LICENSES/GPL-3.0-only for more information.
+'''
 
 from tulip import directory, control, client
 import json, re
@@ -74,20 +64,20 @@ def player(url):
             link = lofs.pop(choice)
 
             stream = client.request(link)
-            stream = re.findall('File1=([\w:\./-]*)', stream)[0]
+            stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
 
             directory.resolve(stream)
 
         else:
 
             control.execute('Playlist.Clear')
-            control.sleep(50)
+            control.sleep(100)
             control.execute('Dialog.Close(all)')
 
     elif control.setting('quality_selector') == '1':
 
         stream = client.request(selector(qofs, lofs))
-        stream = re.findall('File1=([\w:\./-]*)', stream)[0]
+        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '2':
@@ -101,13 +91,13 @@ def player(url):
         else:
             stream = client.request(selector(qofs, lofs))
 
-        stream = re.findall('File1=([\w:\./-]*)', stream)[0]
+        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '3':
 
         stream = client.request(selector(qofs, lofs))
-        stream = re.findall('File1=([\w:\./-]*)', stream)[0]
+        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '4':
@@ -121,7 +111,7 @@ def player(url):
         else:
             stream = selector(qofs, lofs)
 
-        stream = re.findall('File1=([\w:\./-]*)', stream)[0]
+        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '5':
@@ -135,7 +125,7 @@ def player(url):
         else:
             stream = selector(qofs, lofs)
 
-        stream = re.findall('File1=([\w:\./-]*)', stream)[0]
+        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
         directory.resolve(stream)
 
     else:

@@ -1,8 +1,10 @@
 # Addon Name: AliveGR
 # Addon id: plugin.audio.somafm.com
 # Addon Provider: Twilight0
+
 msgid ""
 msgstr ""
+
 "Project-Id-Version: SomaFM\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2016-06-22 11:29+0000\n"
