@@ -14,8 +14,11 @@
         <description lang="en_GB">What exactly is SomaFM? We're a listener-supported, commercial-free internet-only radio station. This means no advertising or annoying commercial interruptions. Our mission is to search out and expose great new music to people who otherwise may never encounter it. Over 20 unique channels of listener-supported, commercial-free, underground/alternative radio broadcasting from San Francisco. All music hand-picked by SomaFM's award-winning DJs and music directors. Please consider donating at https://somafm.com to keep this service alive!Please consider donating by visiting http://somafm.com</description>
         <summary lang="el_GR">Πρόσθετο μουσικής SomaFM</summary>
         <description lang="el_GR">Το ραδιόφωνο SomaFM είναι μια υπηρεσία μουσικής και ραδιοφώνου που υποστηρίζεται πλήρως από τους ακροατές της. Παρακαλώ επισκευθείτε την σελίδα http://somafm.com και πραγματοποιήστε μία δωρεά για την υποστήριξη της υπηρεσίας.</description>
+        <summary lang="ro_RO">Addon muzică SomaFM</summary>
+        <description lang="eo_RO">Ce este SomaFM? SomaFM reprezintă o stație radio care există doar pe Internet, fără reclame sau publicitate și care este susținută de ascultători. Aceasta înseamnă că muzica nu este întreruptă de reclame sau de publicitate. Misiunea noastră este să căutăm și să expunem muzică nouă și bună către oameni care nu ar fi putut s-o audă vreodată. Peste 20 de canale unice susținute de ascultători, fără reclame sau publicitate, din genul underground/alternativ sunt difuzate din San Francisco. Toată muzica este aleasă de DJ-ii și de muzicienii premiați de la SomaFM. Vă rugăm să donați la https://somafm.com pentru a menține serviciul activ! Vp rugă să donați vizitând http://somafm.com</description>
         <disclaimer lang="en_GB">This addon is not developed nor endorsed by SomaFM webmasters/authors/owners/directors</disclaimer>
         <disclaimer lang="el_GR">Η παρούσα μικροεφαρμογή δεν αναπτύσεται ούτε έχει εγκριθεί από τους διαχειριστές/υπεύθυνους/ιδιοκτήτες της υπηρεσίας SomaFM.</disclaimer>
+        <disclaimer lang="ro_RO">Acest addon nu este creat și nici sprijinit de programatorii, autorii, proprietarii sau administratorii SomaFM.</disclaimer>
         <license>GPL-3.0-only</license>
         <website>https://somafm.com</website>
         <news>3.0.0 (13-08-2020)
