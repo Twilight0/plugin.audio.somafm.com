@@ -10,6 +10,7 @@
 
 from tulip import directory, client, cache, control
 from tulip.compat import urljoin
+from tulip.log import log_debug
 import json, re
 import datetime
 
@@ -67,6 +68,7 @@ class Indexer:
             try:
                 self.list = self.get_stations()
             except Exception as e:
+                log_debug('Reason for failing: {0}'.format(e))
                 self.list = None
         else:
             self.list = cache.get(self.get_stations, int(control.setting('period')))
@@ -97,6 +99,7 @@ class Indexer:
         for count, item in list(enumerate(self.list, start=1)):
             item.setdefault('tracknumber', count)
 
+        control.sortmethods()
         control.sortmethods('album')
         control.sortmethods('genre')
         control.sortmethods('listeners')
