@@ -16,31 +16,31 @@ msgstr ""
 
 msgctxt "#30001"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 msgctxt "#30002"
 msgid "Clear function cache"
-msgstr ""
+msgstr "Limpiar caché de funciones"
 
 msgctxt "#30003"
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 msgctxt "#30004"
 msgid "Popularity"
-msgstr ""
+msgstr "Popularidad"
 
 msgctxt "#30005"
 msgid "Genre"
-msgstr ""
+msgstr "Género"
 
 msgctxt "#30006"
 msgid "Choose sort method, currently: {0}"
-msgstr ""
+msgstr "Elegir método de clasificación, actualmente: {0}"
 
 msgctxt "#30007"
 msgid "Quality Selector"
-msgstr ""
+msgstr "Selector de calidad"
 
 msgctxt "#30008"
 msgid "Highest MP3"
@@ -60,40 +60,40 @@ msgstr ""
 
 msgctxt "#30012"
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgctxt "#30013"
 msgid "Ask"
-msgstr ""
+msgstr "Preguntar"
 
 msgctxt "#30014"
 msgid "First time prompt wizard"
-msgstr ""
+msgstr "Asistente de solicitud por primera vez"
 
 msgctxt "#30015"
 msgid "Refresh"
-msgstr ""
+msgstr "Actualizar"
 
 msgctxt "#30016"
 msgid "Station info"
-msgstr ""
+msgstr "Información de la estación"
 
 msgctxt "#30017"
 msgid "Song history"
-msgstr ""
+msgstr "Historia de la canción"
 
 msgctxt "#30018"
 msgid "Activate caching"
-msgstr ""
+msgstr "Activar almacenamiento en caché"
 
 msgctxt "#30019"
 msgid "Caching period in hour(s)"
-msgstr ""
+msgstr "Período de almacenamiento en caché en hora(s)"
 
 msgctxt "#30020"
 msgid "Item info"
-msgstr ""
+msgstr "Información del elemento"
 
 msgctxt "#30402"
 msgid "Success"
-msgstr ""
+msgstr "Realizado correctamente"
