@@ -40,23 +40,23 @@ msgstr "Elegir método de clasificación, actualmente: {0}"
 
 msgctxt "#30007"
 msgid "Quality Selector"
-msgstr "Selector de calidad"
+msgstr "Seleccionar calidad"
 
 msgctxt "#30008"
 msgid "Highest MP3"
-msgstr ""
+msgstr "MP3 Alta calidad"
 
 msgctxt "#30009"
 msgid "Lowest MP3"
-msgstr ""
+msgstr "MP3 Baja calidad"
 
 msgctxt "#30010"
 msgid "Highest AAC"
-msgstr ""
+msgstr "AAC Alta calidad"
 
 msgctxt "#30011"
 msgid "Lowest AAC"
-msgstr ""
+msgstr "AAC Baja calidad"
 
 msgctxt "#30012"
 msgid "Auto"
@@ -68,7 +68,7 @@ msgstr "Preguntar"
 
 msgctxt "#30014"
 msgid "First time prompt wizard"
-msgstr "Asistente de solicitud por primera vez"
+msgstr "Asistente rápido por primera vez"
 
 msgctxt "#30015"
 msgid "Refresh"
@@ -80,7 +80,7 @@ msgstr "Información de la estación"
 
 msgctxt "#30017"
 msgid "Song history"
-msgstr "Historia de la canción"
+msgstr "Historial de canciones"
 
 msgctxt "#30018"
 msgid "Activate caching"
@@ -88,7 +88,7 @@ msgstr "Activar almacenamiento en caché"
 
 msgctxt "#30019"
 msgid "Caching period in hour(s)"
-msgstr "Período de almacenamiento en caché en hora(s)"
+msgstr "Tiempo de almacenamiento en caché (horas)"
 
 msgctxt "#30020"
 msgid "Item info"
