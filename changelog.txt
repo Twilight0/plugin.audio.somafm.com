@@ -1,9 +1,11 @@
-3.0.0 (13-Aug-2020)
+3.0.0 (30-Nov-2020)
 - Add compatibility for Python 3
 - Rework of some modules
 - Add Romanian translation (contrib. tmihai20)
 - Add German translation (contrib. horstle)
 - Add Dutch translation (contrib. dagwieers)
+- Add Spanish translation (contrib. roliverosc)
+- Add Russian translation (contrib. vlmaksime)
 
 2.0.2 (02-Oct-2017)
 - Added info context menu option

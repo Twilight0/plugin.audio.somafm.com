@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.somafm.com" name="SomaFM Radio" version="3.0.0~alpha2" provider-name="Twilight0">
+<addon id="plugin.audio.somafm.com" name="SomaFM Radio" version="3.0.0" provider-name="Twilight0">
     <requires>
-        <import addon="xbmc.python" version="2.24.0"/>
-        <import addon="script.module.tulip" version="2.6.11"/>
+        <import addon="xbmc.addon" version="16.1.000"/>
+        <import addon="script.module.tulip" version="2.8.1"/>
         <import addon="script.module.html2text"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="addon.py">
@@ -26,14 +26,16 @@
         <disclaimer lang="ru_RU">Это дополнение не разработано и не одобрен веб-мастерами/авторами/владельцами/администраторами SomaFM</disclaimer>
         <summary lang="es_ES">Complemento de música SomaFM</summary>
         <description lang="es_ES">¿Qué es exactamente SomaFM? Somos una estación de radio solo por Internet, sin comerciales y compatible con oyentes. Esto significa que no hay publicidad ni interrupciones comerciales molestas. Nuestra misión es buscar y exponer buena música nueva a personas que de otro modo nunca la encontrarían. Más de 20 canales únicos de transmisión de radio alternativa / underground sin comerciales, respaldada por oyentes desde San Francisco. Toda la música seleccionada por los galardonados DJ y directores musicales de SomaFM. Por favor, considere donar en https://somafm.com para mantener vivo este servicio! Considere donar visitando http://somafm.com</description>
-        <disclaimer lang"es_ES">Este complemento no está desarrollado ni respaldado por webmasters / autores / propietarios / directores de SomaFM</disclaimer>
+        <disclaimer lang="es_ES">Este complemento no está desarrollado ni respaldado por webmasters / autores / propietarios / directores de SomaFM</disclaimer>
         <license>GPL-3.0-only</license>
         <website>https://somafm.com</website>
-        <news>3.0.0 (13-Aug-2020)
+        <news>3.0.0 (30-Nov-2020)
 - Add compatibility for Python 3
 - Rework of some modules
 - Add Romanian translation (contrib. tmihai20)
 - Add German translation (contrib. horstle)
-- Add Dutch translation (contrib. dagwieers)</news>
+- Add Dutch translation (contrib. dagwieers)
+- Add Spanish translation (contrib. roliverosc)
+- Add Russian translation (contrib. vlmaksime)</news>
     </extension>
 </addon>
