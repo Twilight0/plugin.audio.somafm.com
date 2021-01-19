@@ -9,7 +9,7 @@
 '''
 
 from tulip import directory, client, cache, control
-from tulip.compat import urljoin
+from tulip.compat import urljoin, zip
 from tulip.log import log_debug
 import json, re
 import datetime
@@ -31,7 +31,7 @@ class Indexer:
         stations = client.parseDOM(xml, 'channel')
         ids = client.parseDOM(xml, 'channel', ret='id')
 
-        items = zip(ids, stations)
+        items = list(zip(ids, stations))
 
         for sid, item in items:
 

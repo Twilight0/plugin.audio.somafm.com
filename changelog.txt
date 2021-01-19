@@ -1,3 +1,7 @@
+3.0.1 (19-Jan-2021)
+- Include assets into addon.xml
+- Minor compatibility fix
+
 3.0.0 (30-Nov-2020)
 - Add compatibility for Python 3
 - Rework of some modules
