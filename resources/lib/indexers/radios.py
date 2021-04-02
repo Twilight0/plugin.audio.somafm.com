@@ -10,9 +10,10 @@
 
 from tulip import directory, client, cache, control
 from tulip.compat import urljoin, zip
-from tulip.log import log_debug
 import json, re
 import datetime
+
+method_cache = cache.FunctionCache().cache_method
 
 
 class Indexer:
@@ -23,6 +24,7 @@ class Indexer:
         self.main = 'http://somafm.com/'
         self.index = urljoin(self.main, 'channels.xml')
 
+    @method_cache(int(control.setting('period') * 60))
     def get_stations(self):
 
         year = datetime.datetime.now().year
@@ -38,7 +40,7 @@ class Indexer:
             station = client.parseDOM(item, 'title')[0].partition('A[')[2][:-3]
             image = client.parseDOM(item, 'image')[0]
             urls = re.findall('<.+?pls.+?>(.+?)</.+?pls>', item)
-            streams = json.dumps(urls)
+            streams = repr(urls)
             listeners = client.parseDOM(item, 'listeners')[0]
             now = client.parseDOM(item, 'lastPlaying')[0].partition('A[')[2][:-3]
             song = now.partition(' - ')[2]
@@ -47,10 +49,7 @@ class Indexer:
             genre = client.parseDOM(item, 'genre')[0]
             description = client.parseDOM(item, 'description')[0].partition('A[')[2][:-3]
 
-            if control.setting('caching') == 'false':
-                title = song
-            else:
-                title = station
+            title = ' - '.join([station, song])
 
             data = {
                 'title': title, 'image': image, 'url': streams, 'listeners': int(listeners), 'history': history,
@@ -64,14 +63,7 @@ class Indexer:
 
     def stations(self):
 
-        if control.setting('caching') == 'false':
-            try:
-                self.list = self.get_stations()
-            except Exception as e:
-                log_debug('Reason for failing: {0}'.format(e))
-                self.list = None
-        else:
-            self.list = cache.get(self.get_stations, int(control.setting('period')))
+        self.list = self.get_stations()
 
         if self.list is None:
             return

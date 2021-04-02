@@ -1,3 +1,7 @@
+3.1.0 (02-Apr-2021)
+- Change caching method
+- Bug fixes
+
 3.0.1 (19-Jan-2021)
 - Include assets into addon.xml
 - Minor compatibility fix

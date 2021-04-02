@@ -11,7 +11,7 @@
 import sys
 from tulip.compat import parse_qsl
 from tulip.control import refresh
-from tulip.cache import clear
+from tulip.cache import FunctionCache
 from resources.lib.indexers import radios
 from resources.lib.modules.player import player
 from resources.lib.modules import info
@@ -55,7 +55,7 @@ elif action == 'info_cm':
 
 elif action == 'cache_clear':
 
-    clear(withyes=False)
+    FunctionCache().reset_cache(notify=True)
 
 elif action == 'refresh':
 

@@ -9,7 +9,9 @@
 '''
 
 from tulip import directory, control, client
-import json, re
+import re
+from ast import literal_eval
+from random import choice
 
 
 ttz = 'MP3 320k'
@@ -30,11 +32,18 @@ def selector(qofs, lofs, quality=ote):
     return stream
 
 
+def resolver(url):
+
+    return choice(re.findall(r'File1=([\w:\./-]*)', url))
+
+
 def player(url):
 
     qofs = []
 
-    lofs = json.loads(url)
+    lofs = literal_eval(url)
+
+    print(lofs)
 
     for item in lofs:
 
@@ -63,8 +72,7 @@ def player(url):
 
             link = lofs.pop(choice)
 
-            stream = client.request(link)
-            stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
+            stream = resolver(link)
 
             directory.resolve(stream)
 
@@ -77,7 +85,7 @@ def player(url):
     elif control.setting('quality_selector') == '1':
 
         stream = client.request(selector(qofs, lofs))
-        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
+        stream = resolver(stream)
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '2':
@@ -91,13 +99,13 @@ def player(url):
         else:
             stream = client.request(selector(qofs, lofs))
 
-        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
+        stream = resolver(stream)
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '3':
 
         stream = client.request(selector(qofs, lofs))
-        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
+        stream = resolver(stream)
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '4':
@@ -111,7 +119,7 @@ def player(url):
         else:
             stream = selector(qofs, lofs)
 
-        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
+        stream = resolver(stream)
         directory.resolve(stream)
 
     elif control.setting('quality_selector') == '5':
@@ -125,7 +133,7 @@ def player(url):
         else:
             stream = selector(qofs, lofs)
 
-        stream = re.findall(r'File1=([\w:\./-]*)', stream)[0]
+        stream = resolver(stream)
         directory.resolve(stream)
 
     else:
