@@ -97,3 +97,7 @@ msgstr "Informații"
 msgctxt "#30402"
 msgid "Success"
 msgstr "Succes"
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr "Nu s-a găsit niciun rezultat"

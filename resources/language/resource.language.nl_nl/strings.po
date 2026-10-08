@@ -97,3 +97,7 @@ msgstr "iteminformatie"
 msgctxt "#30402"
 msgid "Success"
 msgstr "Succes"
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr "Geen resultaten gevonden"

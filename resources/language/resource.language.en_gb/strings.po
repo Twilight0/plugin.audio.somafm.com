@@ -97,3 +97,7 @@ msgstr ""
 msgctxt "#30402"
 msgid "Success"
 msgstr ""
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr ""

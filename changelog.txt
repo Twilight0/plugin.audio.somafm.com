@@ -1,3 +1,15 @@
+4.0.0
+- Port to modern stack: tulip 4.x, urldispatcher, netclient, unicache
+- Replace manual routing with urldispatcher
+- Switch listings to https channels.json, drop brittle channels.xml parsing
+- Resolve streams by station id instead of passing repr() lists through urls
+- Fix lowest-AAC quality picking the wrong playlist
+- Drop html2text dependency, parse song history with stdlib
+- Kodi 20+ metadata: xbmc.python 3.0.0, reuselanguageinvoker
+- Fix playback loop-fail: title-only resolve meta, signal resolve failure
+- Song history shows clean track table with times in your local timezone
+- Refresh clears the listing cache first, so it shows fresh now-playing titles
+
 3.1.0 (02-Apr-2021)
 - Change caching method
 - Bug fixes

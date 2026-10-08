@@ -97,3 +97,7 @@ msgstr "Información del elemento"
 msgctxt "#30402"
 msgid "Success"
 msgstr "Realizado correctamente"
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr "No se encontraron resultados"

@@ -97,3 +97,7 @@ msgstr "Eintragsinfo"
 msgctxt "#30402"
 msgid "Success"
 msgstr "Erfolg"
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr "Keine Ergebnisse gefunden"

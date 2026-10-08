@@ -99,3 +99,7 @@ msgstr "Πληροφορίες αντικειμένου"
 msgctxt "#30402"
 msgid "Success"
 msgstr "Επιτυχία"
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr "Δεν βρέθηκαν αποτελέσματα"

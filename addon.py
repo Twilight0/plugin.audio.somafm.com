@@ -1,62 +1,54 @@
 # -*- coding: utf-8 -*-
 
 '''
-    Soma FM Addon
+    SomaFM Addon
     Author Twilight0
 
     SPDX-License-Identifier: GPL-3.0-only
     See LICENSES/GPL-3.0-only for more information.
 '''
 
-import sys
-from tulip.compat import parse_qsl
-from tulip.control import refresh
-from tulip.cache import FunctionCache
-from resources.lib.indexers import radios
-from resources.lib.modules.player import player
-from resources.lib.modules import info
+from sys import argv
+from urllib.parse import parse_qsl
 
-syshandle = int(sys.argv[1])
-sysaddon = sys.argv[0]
-params = dict(parse_qsl(sys.argv[2].replace('?','')))
+from urldispatcher import urldispatcher
 
-########################################################################################################################
+from resources.lib import somafm  # noqa: F401
+from tulip.log import log
 
-action = params.get('action')
-url = params.get('url')
-image = params.get('image')
-name = params.get('name')
-title = params.get('title')
-text = params.get('text')
 
-########################################################################################################################
+def main(argv=argv):
 
-if action is None:
+    try:
+        params = dict(parse_qsl(argv[2][1:]))
+    except IndexError:
+        params = {}
 
-    radios.Indexer().stations()
+    action = params.get('action') or 'root'
 
-########################################################################################################################
+    try:
+        urldispatcher.dispatch(action, params)
+    except Exception as e:
+        # Stale actions (e.g. pre-4.0 favourites using info_cm/cache_clear
+        # or description?text=...) must not kill the listing when the
+        # interpreter is reused across invocations.
+        log('SomaFM: action |{0}| failed ({1})'.format(action, e))
+        if action == 'play':
+            # A directory listing here would make the playlist player walk
+            # every station as "unplayable". Signal failure instead.
+            try:
+                from tulip import kodi as _kodi
+                handle = int(argv[1])
+                _kodi.resolve(handle, False, _kodi.item())
+            except Exception:
+                pass
+        elif action != 'root':
+            try:
+                urldispatcher.dispatch('root', {})
+            except Exception:
+                pass
 
-elif action == 'play':
 
-    player(url)
+if __name__ == '__main__':
 
-elif action == 'description':
-
-    info.description(text)
-
-elif action == 'history':
-
-    info.history(url)
-
-elif action == 'info_cm':
-
-    info.info_cm()
-
-elif action == 'cache_clear':
-
-    FunctionCache().reset_cache(notify=True)
-
-elif action == 'refresh':
-
-    refresh()
+    main()

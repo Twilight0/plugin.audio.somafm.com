@@ -97,3 +97,7 @@ msgstr "Сведения"
 msgctxt "#30402"
 msgid "Success"
 msgstr "Успешно"
+
+msgctxt "#30021"
+msgid "No results were found"
+msgstr "Ничего не найдено"

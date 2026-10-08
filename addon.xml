@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.audio.somafm.com" name="SomaFM Radio" version="3.1.0" provider-name="Twilight0">
+<addon id="plugin.audio.somafm.com" name="SomaFM Radio" version="4.0.0" provider-name="Twilight0">
     <requires>
-        <import addon="xbmc.addon" version="16.1.000"/>
-        <import addon="script.module.tulip" version="2.8.1"/>
-        <import addon="script.module.html2text"/>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.tulip" version="4.1.2"/>
+        <import addon="script.module.urldispatcher" version="1.1.0"/>
+        <import addon="script.module.netclient" version="1.1.2"/>
+        <import addon="script.module.unicache" version="1.0.0"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="addon.py">
         <provides>audio</provides>
     </extension>
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
+        <reuselanguageinvoker>true</reuselanguageinvoker>
         <summary lang="en_GB">SomaFM music addon</summary>
         <description lang="en_GB">What exactly is SomaFM? We're a listener-supported, commercial-free internet-only radio station. This means no advertising or annoying commercial interruptions. Our mission is to search out and expose great new music to people who otherwise may never encounter it. Over 20 unique channels of listener-supported, commercial-free, underground/alternative radio broadcasting from San Francisco. All music hand-picked by SomaFM's award-winning DJs and music directors. Please consider donating at https://somafm.com to keep this service alive!Please consider donating by visiting http://somafm.com</description>
         <disclaimer lang="en_GB">This addon is not developed nor endorsed by SomaFM webmasters/authors/owners/directors</disclaimer>
@@ -27,24 +30,26 @@
         <summary lang="es_ES">Complemento de música SomaFM</summary>
         <description lang="es_ES">¿Qué es exactamente SomaFM? Somos una estación de radio solo por Internet, sin comerciales y compatible con oyentes. Esto significa que no hay publicidad ni interrupciones comerciales molestas. Nuestra misión es buscar y exponer buena música nueva a personas que de otro modo nunca la encontrarían. Más de 20 canales únicos de transmisión de radio alternativa / underground sin comerciales, respaldada por oyentes desde San Francisco. Toda la música seleccionada por los galardonados DJ y directores musicales de SomaFM. Por favor, considere donar en https://somafm.com para mantener vivo este servicio! Considere donar visitando http://somafm.com</description>
         <disclaimer lang="es_ES">Este complemento no está desarrollado ni respaldado por webmasters / autores / propietarios / directores de SomaFM</disclaimer>
+        <language>en de el es nl ro ru</language>
         <license>GPL-3.0-only</license>
+        <source>https://github.com/Twilight0/plugin.audio.somafm.com</source>
         <website>https://somafm.com</website>
-        <news>3.1.0 (02-Apr-2021)
+        <news>[B]4.0.0[/B]
+- Port to modern stack: tulip 4.x, urldispatcher, netclient, unicache
+- Replace manual if/elif routing in addon.py with urldispatcher
+- Switch listings to https channels.json, drop brittle channels.xml CDATA parsing
+- Resolve streams by station id instead of passing repr() lists through urls
+- Fix lowest-AAC quality picking the wrong playlist
+- Drop script.module.html2text dependency, parse song history with stdlib
+- Migrate endpoints and artwork to https
+- Kodi 20+ metadata: xbmc.python 3.0.0, reuselanguageinvoker
+- Fix playback loop-fail: title-only resolve meta, signal resolve failure
+- Song history shows clean track table with times in your local timezone
+- Refresh clears the listing cache first, so it shows fresh now-playing titles
+
+[B]3.1.0[/B]
 - Change caching method
-- Bug fixes
-
-3.0.1 (19-Jan-2021)
-- Include assets into addon.xml
-- Minor compatibility fix
-
-3.0.0 (30-Nov-2020)
-- Add compatibility for Python 3
-- Rework of some modules
-- Add Romanian translation (contrib. tmihai20)
-- Add German translation (contrib. horstle)
-- Add Dutch translation (contrib. dagwieers)
-- Add Spanish translation (contrib. roliverosc)
-- Add Russian translation (contrib. vlmaksime)</news>
+- Bug fixes</news>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
